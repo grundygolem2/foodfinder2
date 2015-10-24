@@ -13,8 +13,4 @@ function parseData(data)
                 marker.setMap(map);
 
         }
-        //alert("pie");
-
-        //console.log(data);
-
 }
