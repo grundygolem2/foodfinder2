@@ -49,7 +49,7 @@ input {
 
 @media screen and (max-width: 1000px) {
 	input {
-		width: 87%
+		width: 90%
 	}
 }
 
