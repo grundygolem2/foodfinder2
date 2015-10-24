@@ -25,50 +25,46 @@ def addEvent():
 	else:
 		rqst = request.form.get
 	
-	name = "\""+rqst('name')+"\""
-	starttime = "\""+rqst('starttime')+"\""
-	endtime = "\""+rqst('endtime')+"\""
+	name = rqst('name')
+	starttime = rqst('starttime')
+	endtime = rqst('endtime')
 	lat = float(rqst('lat'))
 	lon = float(rqst('lon'))
 	
 	if rqst('address'):
-		address = "\""+rqst('address')+"\""
+		address = rqst('address')
 	else:
-		address = "NULL"
+		address = None
 	
 	if rqst('loc_help'):
-		loc_help = "\""+rqst('loc_help')+"\""
+		loc_help = rqst('loc_help')
 	else:
-		loc_help = "NULL"
+		loc_help = None
 	
 	if rqst('desc'):
-		desc = "\""+rqst('desc')+"\""
+		desc = rqst('desc')
 	else:
-		desc = "NULL"
+		desc = None
 		
 	if rqst('tags'):
-		tags = "\""+rqst('tags')+"\""
+		tags = rqst('tags')
 	else:
-		tags = "NULL"
+		tags = None
 	
 	cur = mysql.connection.cursor()
 	query = '''
 	INSERT INTO foodfinder_events
 	(`name`,`starttime`,`endtime`,`lat`,`lon`,`address`,`loc_help`,
-	`desc`,`tags`)
+	`desc`,`tags`,`addedtime`)
 	VALUES
-	(%s,%s,%s,%f,%f,%s,%s,%s,%s)
-	''' % (name,starttime,endtime,lat,lon,address,loc_help,desc,tags)
+	(%s,%s,%s,%s,%s,%s,%s,%s,%s,NOW())
+	'''
 	
 	query = ' '.join(query.split())
-	cur.execute(query)
+	cur.execute(query, (name,starttime,endtime,lat,lon,address,loc_help,desc,tags))
 	mysql.connection.commit()
 	return query
-		
-		
-	
-	
-	
+
 	
 @app.route("/getEvents", methods=['GET'])
 def getEvents():
