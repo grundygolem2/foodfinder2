@@ -14,8 +14,8 @@ function initMap() {
 
 function renderMap(lat, lng)
 {
-        myPos =new google.maps.LatLng(lat, lng);
-        map = new google.maps.Map(document.getElementById("map_canvas"),
+        myPos = new google.maps.LatLng(lat, lng);
+        map = new google.maps.Map(document.getElementById("map"),
                 {center: new google.maps.LatLng(12,12),
                 zoom: 15,
                 mapTypeId: google.maps.MapTypeId.ROADMAP});

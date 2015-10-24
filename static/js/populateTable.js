@@ -2,7 +2,7 @@ function populateTable(data)
 {
         console.log(data);
         var tbod = document.getElementsByTagName("tbody");
-        console.log(data)
+        console.log(data);
         for(var i = 0; i < data.length; i++){
                 console.log(data[i]);
                 var trow = document.createElement("tr");
@@ -35,7 +35,7 @@ function populateTable(data)
 
                 //Distance(miles)
                 tdat = document.createElement("td");
-                tdat.appendChild(document.createTextNode(Math.ceil(data[i].dist*10)*2);
+                tdat.appendChild(document.createTextNode(Math.ceil(data[i].dist*10)*2));
                                  //this calculates time to location as crow flies in 
                                  // minutes assuming 3mph
                                  //takes miles multiplies by 10 truncates /10 *60/3 for minutes per mile. 
