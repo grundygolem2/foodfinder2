@@ -289,7 +289,7 @@
 				if(http.readyState == 4 && http.status == 200) {
 					//alert(http.responseText);
 					$('#myModal').modal('hide');
-					setTimeout(redrawMap(global_lat,global_lon),500);
+					setTimeout(function(){redrawMap(global_lat,global_lon)},500);
 				}
 			}
 			http.send(params);
