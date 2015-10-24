@@ -104,6 +104,7 @@
       <form id="searchform">
         <div class="form-group">
           Find food near you:
+          <button id="locateuser" type="button" class="btn btn-default" aria-label="Find me!"> Find me!</button>
           <input type="text" class="form-control" id="userloc" placeholder="160 College Ave, Medford MA">
           <button id="findfood" type="button" class="btn btn-default" aria-label="Find food!"> Find food!</button>
 

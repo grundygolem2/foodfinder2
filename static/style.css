@@ -1,7 +1,14 @@
 #map {
 	background-color:#992288;
 	height: 400px;
-	width: 46%;
+	width: 46%
+
+}
+
+@media screen and (max-width: 1000px) {
+	#map {
+		width: 92%
+	}
 }
 
 .submit-buttons {
@@ -26,3 +33,4 @@ nav {
 input {
 	width: 50%;
 }
+
