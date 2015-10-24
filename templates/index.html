@@ -193,7 +193,7 @@
 							});
 			}
 			else{
-					alert("No Geolocation So fuck you");
+					alert("No Geolocation");
 			}
 		}
 		
@@ -205,12 +205,26 @@
 							});
 			}
 			else{
-					alert("No Geolocation So fuck you");
+					alert("No Geolocation");
+			}
+		}
+		
+		function updateGlobalLoc() {
+			if(navigator.geolocation){
+					navigator.geolocation.getCurrentPosition(
+							function(position){
+									global_lat = position.coords.latitude;
+									global_lon = position.coords.longitude;
+							});
+			}
+			else{
+					alert("No Geolocation");
 			}
 		}
 		
 		$(document).ready(function() {
-			$('#post-submit').click(submitPost)
+			$('#post-submit').click(submitPost);
+			updateGlobalLoc();
 		});
 		
 		Date.prototype.yyyymmddhhmnss = function() {
