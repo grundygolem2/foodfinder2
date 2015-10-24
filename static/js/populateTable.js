@@ -1,7 +1,7 @@
 function populateTable(data)
 {
         console.log(data);
-        var tbod = document.getElementById("tabpart");
+        var tbod = document.getElementsByTagName("tbody");
         console.log(data)
         for(var i = 0; i < data.length; i++){
                 console.log(data[i]);
@@ -38,7 +38,7 @@ function populateTable(data)
                 tdat.appendChild(document.createTextNode(data[i].dist));
                 trow.appendChild(tdat);
 
-                tbod.appendChild(trow);
+                tbod[0].appendChild(trow);
 
         }
 }
