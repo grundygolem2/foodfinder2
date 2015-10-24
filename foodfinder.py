@@ -23,7 +23,7 @@ def main():
 def maptest():
 	return render_template('map.html')
 	
-@app.route("/addEvent", methods=['GET']) #Change to POST later
+@app.route("/addEvent", methods=['POST']) #Change to POST later
 def addEvent():
 	if request.method == 'GET':
 		rqst = request.args.get
