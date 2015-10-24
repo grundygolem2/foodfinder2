@@ -29,7 +29,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Foodfinder</a>
+          <h1>Foodfinder</h1>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -37,7 +37,7 @@
             <li>
               <!-- Button trigger modal -->
               <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" onclick="autopopulatePost()">
-                Post your food event
+                Add your food event
               </button>
             </li>
           </ul>
@@ -45,7 +45,7 @@
       </div><!-- /.container-fluid -->
     </nav>
 
-    
+
 
     <!-- Modal for posting food -->
     <div id="main">
@@ -54,36 +54,37 @@
           <div class="modal-content">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title" id="myModalLabel">Post your food event</h4>
+              <h2 class="modal-title" id="myModalLabel">Add your food event</h4>
             </div>
             <div class="modal-body">
               <form id="postform">
-                <div class="form-group">
-                  <label for="provider"><span style = "color: red">*</span>Title:</label>
-                  <input type="text" class="form-control" id="provider" placeholder="Club's general interest meeting">
+                <div class="form-group form-inline">
+                  <label for="provider"><span style = "color: red">*</span>Title</label> <input type="text" class="form-control input-lg" id="provider" placeholder="Club meeting">
                 </div>
                 <div class="form-group">
-                  <label for="location"><span style = "color: red">*</span>Location:</label>
-                  <input type="text" class="form-control" id="location" placeholder="160 College Ave, Medford MA">
-                  <button id="locate" type="button" class="btn btn-default" aria-label="Find me!" onclick="populateLocation()"> Find me!</button> <br/> <br/>
-                  <label for="locdesc">Help someone find it:</label>
-                  <input type="text" class="form-control" id="locdesc" placeholder="In Room 123">
+                    <label for="location"><span style = "color: red">*</span>Location</label>
+                    <button id="locate" type="button" class="btn btn-default" aria-label="Find me!" onclick="populateLocation()"> Find me!</button>
+                    <input type="text" class="form-control input-lg form-inline" id="location" placeholder="160 College Ave, Medford MA">
                 </div>
-                <div class="form-group">
-                  <label for="food"><span style = "color: red">*</span>Date:</label>
-                  <input type="text" class="form-control" id="date" placeholder="MM/DD/YYYY">
-                </div>             
-                <div class="form-group">
-                  <label for="starttime"><span class="important">*</span>Start:</label>
-                  <input type="text" class="form-control" id="starttime" placeholder="0:00pm">
+                <div class="form-group form-inline">
+                  <label for="date"><span style = "color: red">*</span>Date</label>
+                  <input type="text" class="form-control input-lg form-inline" id="date" placeholder="MM/DD/YYYY">
                 </div>
-                <div class="form-group">
-                  <label for="endtime">End:</labeL>
-                  <input type="text" class="form-control" id="endtime" placeholder="0:00pm">
+                <div class="form-group form-inline">
+                  <label for="starttime"><span class="important">*</span>Start</label>
+                  <input type="text" class="form-control input-lg" id="starttime" placeholder="0:00pm">
                 </div>
-                <div class="form-group">
-                  <label for="food">Desciption:</label>
-                  <input type="text" class="form-control" id="food" placeholder="Free food at general interest meeting">
+                <div class="form-group form-inline">
+                  <label for="endtime">End</label>
+                  <input type="text" class="form-control input-lg" id="endtime" placeholder="0:00pm">
+                </div>
+                <div class="form-group form-inline">
+                  <label for="food">Description</label>
+                  <input type="text" class="form-control input-lg form-inline" id="food" placeholder="Free food at club meeting">
+                </div>
+                <div class="form-group form-inline">
+                    <label for="locdesc">Help us find it</label>
+                    <input type="text" class="form-control input-lg" id="locdesc" placeholder="In Room 123">
                 </div>
                 <small><span style = "color: red">*</span>: This field is required</small>
                 </div>
@@ -102,6 +103,7 @@
       <form id="searchform">
         <div class="main-title">
             Find food near you <br />
+          <button id="location" type="button" class="btn btn-lg" aria-label="Find me!" onclick="populateLocation()"> Find me!</button>
           <input type="text" class="main-entry" id="userloc" placeholder="160 College Ave, Medford MA">
           <button id="findfood" type="button" class="btn btn-lg" aria-label="Find food!"> Go!</button>
 
@@ -130,6 +132,9 @@
         </table>
         </div>
       </div>
+      <div class="ending">
+        <small>Developed by John Casey, Riley Wood, David Taus, Ben Pall, and Jacob Gerace at Tufts Polyhack 2015</small>
+      </div>
     </div>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -144,13 +149,13 @@
 			var yyyy = today.getFullYear();
 			if(dd<10){
 				dd='0'+dd;
-			} 
+			}
 			if(mm<10){
 				mm='0'+mm;
-			} 
+			}
 			var date = mm+'/'+dd+'/'+yyyy;
 			document.getElementById("date").value = date;
-			
+
 			var hh = today.getHours();
 			var mn = today.getMinutes();
 			var endhh = hh + 1;
@@ -172,7 +177,7 @@
 			document.getElementById("endtime").value = endtime;
 			populateLocation();
 		}
-		
+
 		function populateLocation() {
 			if(navigator.geolocation){
 					navigator.geolocation.getCurrentPosition(
