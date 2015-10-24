@@ -16,7 +16,7 @@ mysql = MySQL(app)
 
 @app.route("/")
 def main():
-	return render_template('signup.html')
+	return render_template('index.html')
 	
 @app.route("/addEvent", methods=['GET']) #Change to POST later
 def addEvent():
