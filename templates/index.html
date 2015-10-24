@@ -18,7 +18,7 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
-  <body>
+  <body onload="initMap()">
     <nav class="navbar navbar-default">
       <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -137,6 +137,9 @@
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="../static/bootstrap.min.js"></script>
     <script src="http://maps.googleapis.com/maps/api/js"></script>
+    <script src="../static/js/map.js"></script>
+    <script src="../static/js/populateTable.js"></script>
+    <script src="../static/js/addMarkers.js"></script>
     <script type="text/javascript">
 		function autopopulatePost() {
 			var today = new Date();
