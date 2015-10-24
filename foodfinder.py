@@ -4,6 +4,7 @@ from event import Event
 import time,datetime
 import json
 
+
 app = Flask(__name__)
 app.debug = True
  
@@ -116,8 +117,12 @@ def getEventsWithinRadius(lat, lon, miles):
 	# Pass fields to Event constructor and make list of all
 	return [Event(*event_tuple[0:10]) for event_tuple in rv] 
 
-#def eventListToJSON(event_list):
-	#return json.dumps([e.__dict__ for e in event_list])
+def eventListToJSON(event_list):
+	event_dicts = [e.__dict__ for e in event_list]
+	for i in range(0,len(event_dicts)):
+		event_dicts[i]['starttime'] = str(event_dicts[i]['starttime'])
+		event_dicts[i]['endtime'] = str(event_dicts[i]['endtime'])
+	return json.dumps(event_dicts)
 
 def eventListToTableRows(event_list):
 	return render_template('event_table.html', events=event_list)
