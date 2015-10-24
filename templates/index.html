@@ -65,7 +65,7 @@
                 <div class="form-group">
                   <label for="location"><span style = "color: red">*</span>Location:</label>
                   <input type="text" class="form-control" id="location" placeholder="160 College Ave, Medford MA">
-                  <button id="locate" type="button" class="btn btn-default" aria-label="Find me!"> Find me!</button> <br/> <br/>
+                  <button id="locate" type="button" class="btn btn-default" aria-label="Find me!" onclick="populateLocation()"> Find me!</button> <br/> <br/>
                   <label for="locdesc">Help someone find it:</label>
                   <input type="text" class="form-control" id="locdesc" placeholder="In Room 123">
                 </div>
@@ -170,7 +170,10 @@
 			var endtime = endhh+":"+mn;
 			document.getElementById("starttime").value = starttime;
 			document.getElementById("endtime").value = endtime;
-			
+			populateLocation();
+		}
+		
+		function populateLocation() {
 			if(navigator.geolocation){
 					navigator.geolocation.getCurrentPosition(
 							function(position){
@@ -180,7 +183,6 @@
 			else{
 					alert("No Geolocation So fuck you");
 			}
-			
 		}
     </script>
   </body>
