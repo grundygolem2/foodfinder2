@@ -88,7 +88,7 @@
                     <input type="text" class="form-control input-lg form-inline" id="loc_help" placeholder="In Room 123">
                 </div>
                 <small><span style = "color: red">*</span>: This field is required</small>
-                </div>
+                <!--</div>-->
                 <div class="submit-buttons">
                   <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                   <button type="button" class="btn btn-primary" id="post-submit">Submit</button>
@@ -115,7 +115,7 @@
       <div id="map" class="map col-md-12 container"></div>
 
       <!-- List -->
-      <div class="container">
+      <div class="container-fluid">
         <h2>Closest food events to you</h2>
         <div class="table-responsive">
         <table class="table">
@@ -128,7 +128,7 @@
               <th>Walking time (mins)</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody id="eventTable">
           </tbody>
         </table>
         </div>
