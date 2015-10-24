@@ -1,0 +1,24 @@
+#map {
+	background-color:#992288;
+	height: 400px;
+	width: 46%;
+}
+
+.submit-buttons {
+	text-align: right;
+	padding-bottom: 10px;
+	padding-right: 10px;
+}
+
+.important {
+	color:red;
+}
+
+.container {
+	margin: 3%;
+}
+
+nav {
+	padding-top: 10px;
+	padding-bottom: 10px;
+}

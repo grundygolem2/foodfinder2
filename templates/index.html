@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Foodfinder</title>
+
+    <!-- Bootstrap -->
+    <link href="../static/bootstrap.min.css" rel="stylesheet">
+    <link href="../static/style.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Foodfinder</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav navbar-right">
+            <li>
+              <!-- Button trigger modal -->
+              <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+                Post your food event
+              </button>
+            </li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+
+    
+
+    <!-- Modal for posting food -->
+    <div id="main">
+      <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModalLabel">Post your food event</h4>
+            </div>
+            <div class="modal-body">
+              <form id="postform">
+                <div class="form-group">
+                  <label for="provider"><span style = "color: red">*</span>Title:</label>
+                  <input type="text" class="form-control" id="provider" placeholder="Club's general interest meeting">
+                </div>
+                <div class="form-group">
+                  <label for="food">Desciption:</label>
+                  <input type="text" class="form-control" id="food" placeholder="Free food at general interest meeting">
+                </div>
+                <div class="form-group">
+                  <label for="location"><span style = "color: red">*</span>Location:</label>
+                  <input type="text" class="form-control" id="location" placeholder="160 College Ave, Medford MA">
+                  <button id="locate" type="button" class="btn btn-default" aria-label="Find me!"> Find me!</button> <br/> <br/>
+                  <label for="locdesc">Help someone find it:</label>
+                  <input type="text" class="form-control" id="locdesc" placeholder="Up the stairs, between the thing and the other thing.">
+                </div>
+                <div class="form-group">
+                  <label for="food"><span style = "color: red">*</span>Date:</label>
+                  <input type="text" class="form-control" id="food" placeholder="MMDDYYYY">
+                </div>             
+                <div class="form-group">
+                  <label>Time of day:</label> <br/>
+                  <label for="starttime"><span class="important">*</span>From:</label>
+                  <input type="text" class="form-control" id="starttime" placeholder="0:00pm">
+                </div>
+                <div class="form-group">
+                  <label for="endtime">Until:</labeL>
+                  <input type="text" class="form-control" id="endtime" placeholder="0:00pm">
+                </div>
+                <small><span style = "color: red">*</span>: This field is required</small>
+                </div>
+                <div class="submit-buttons">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                  <button type="button" class="btn btn-primary">Submit</button>
+                </div>
+              </form>
+              <!--<div id="formmap" class="map"></div>-->
+            </div>
+          </div>
+        </div>
+      </div>
+
+     
+
+      <!-- Map -->
+      <div id="map" class="map col-md-12 container"></div>
+
+      <!-- List -->
+      <div class="container">
+        <h2>Closest food events to you</h2>
+        <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Description</th>
+              <th>Date</th>
+              <th>Start Time</th>
+              <th>End Time</th>
+              <th>Distance (miles)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>a1</td>
+              <td>b2</td>
+              <td>c3</td>
+              <td>d4</td>
+              <td>e5</td>
+              <td>f6</td>
+            </tr>
+            <tr>
+              <td>a1</td>
+              <td>b2</td>
+              <td>c3</td>
+              <td>d4</td>
+              <td>e5</td>
+              <td>f6</td>
+            </tr>
+          </tbody>
+        </table>
+        </div>
+      </div>
+    </div>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="../static/bootstrap.min.js"></script>
+  </body>
+</html>
