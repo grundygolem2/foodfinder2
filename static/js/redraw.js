@@ -9,7 +9,7 @@ function redrawMap(lat, lng)
                         data = JSON.parse(request.responseText);
                         clearMarkers();
                         parseData(data);
-                        populateTable(data);
+                        rePopulateTable(data);
                 }
         };
         request.open("GET", "/getEventsJSON?lat=" + lat + "&lon=" + lng + "&maxdist=" + 1, true);
