@@ -35,7 +35,7 @@ function populateTable(data)
 
                 //Distance(miles)
                 tdat = document.createElement("td");
-                tdat.appendChild(document.createTextNode(data[i].dist));
+                tdat.appendChild(document.createTextNode(Math.ceil(data[i].dist*10)/10);
                 trow.appendChild(tdat);
 
                 tbod[0].appendChild(trow);
