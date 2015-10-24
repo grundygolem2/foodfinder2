@@ -104,7 +104,7 @@
       <form id="searchform">
         <div class="main-title">
             Find food near you <br />
-          <button id="location" type="button" class="btn btn-lg" aria-label="Find me!" onclick="populateLocation()"> Find me!</button>
+          <button id="location" type="button" class="btn btn-lg" aria-label="Find me!" onclick="populateUserLocation()"> Find me!</button>
           <input type="text" class="main-entry" id="userloc" placeholder="160 College Ave, Medford MA">
           <button id="findfood" type="button" class="btn btn-lg" aria-label="Find food!" onclick="updateEventList()"> Go!</button>
 
@@ -189,6 +189,18 @@
 					navigator.geolocation.getCurrentPosition(
 							function(position){
 									document.getElementById("location").value=position.coords.latitude+","+position.coords.longitude;
+							});
+			}
+			else{
+					alert("No Geolocation So fuck you");
+			}
+		}
+		
+		function populateUserLocation() {
+			if(navigator.geolocation){
+					navigator.geolocation.getCurrentPosition(
+							function(position){
+									document.getElementById("userloc").value=position.coords.latitude+","+position.coords.longitude;
 							});
 			}
 			else{
