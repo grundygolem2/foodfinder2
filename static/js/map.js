@@ -29,7 +29,7 @@ function renderMap(lat, lng)
                                 populateTable(data);
                         }
                 };
-                request.open("GET", "/getEventsJSON", true);
-                request.send("lat=" + lat + "&lon=" + lng + "&maxdist=" + 1);
+                request.open("GET", "/getEventsJSON?lat=" + lat + "&lon=" + lng + "&maxdist=" + 1, true);
+                request.send(null);
 
 }                
