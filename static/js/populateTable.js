@@ -35,7 +35,11 @@ function populateTable(data)
 
                 //Distance(miles)
                 tdat = document.createElement("td");
-                tdat.appendChild(document.createTextNode(Math.ceil(data[i].dist*10)/10);
+                tdat.appendChild(document.createTextNode(Math.ceil(data[i].dist*10)*2);
+                                 //this calculates time to location as crow flies in 
+                                 // minutes assuming 3mph
+                                 //takes miles multiplies by 10 truncates /10 *60/3 for minutes per mile. 
+                                 // which reduces to *2
                 trow.appendChild(tdat);
 
                 tbod[0].appendChild(trow);
