@@ -22,3 +22,7 @@ nav {
 	padding-top: 10px;
 	padding-bottom: 10px;
 }
+
+input {
+	width: 50%;
+}
