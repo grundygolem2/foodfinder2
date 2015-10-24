@@ -81,7 +81,7 @@ def getEventsJSON():
 	lat = float(request.args.get('lat'))
 	lon = float(request.args.get('lon'))
 	maxdist = float(request.args.get('maxdist'))
-	events = getEventsWithinRadius(lat, lon, maxdist) # 42.4074840, -71.1190230
+	events = getEventsWithinRadius(lat, lon, maxdist) # 42.4074840, -71.1190230 mine
 	return eventListToJSON(events)
 	
 '''
@@ -140,8 +140,8 @@ def jsonToEventList(eventsJson):
 		lon = float(event_dict['lon'])
 		address = event_dict['address']
 		loc_help = event_dict['loc_help']
-		desc = event_dict['desc']
 		tags = event_dict['tags']
+		desc = event_dict['desc']
 		event_list.append(Event(name,starttime,endtime,lat,lon,address,loc_help,desc,tags,None))
 	return event_list
 	
