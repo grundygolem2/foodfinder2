@@ -7,7 +7,7 @@ function initMap() {
                         });
         }
         else{
-                alert("No Geolocation So fuck you");
+                alert("No Geolocation");
         }
 }
 
