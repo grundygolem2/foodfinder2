@@ -4,6 +4,7 @@ from event import Event
 import time,datetime
 import json
 
+
 app = Flask(__name__)
 app.debug = True
  
@@ -17,6 +18,10 @@ mysql = MySQL(app)
 @app.route("/")
 def main():
 	return render_template('index.html')
+	
+@app.route("/maptest")
+def maptest():
+	return render_template('map.html')
 	
 @app.route("/addEvent", methods=['GET']) #Change to POST later
 def addEvent():
@@ -80,7 +85,7 @@ def getEventsJSON():
 	lat = float(request.args.get('lat'))
 	lon = float(request.args.get('lon'))
 	maxdist = float(request.args.get('maxdist'))
-	events = getEventsWithinRadius(lat, lon, maxdist) # 42.4074840, -71.1190230
+	events = getEventsWithinRadius(lat, lon, maxdist) # 42.4074840, -71.1190230 mine
 	return eventListToJSON(events)
 	
 '''
@@ -116,8 +121,12 @@ def getEventsWithinRadius(lat, lon, miles):
 	# Pass fields to Event constructor and make list of all
 	return [Event(*event_tuple[0:10]) for event_tuple in rv] 
 
-#def eventListToJSON(event_list):
-	#return json.dumps([e.__dict__ for e in event_list])
+def eventListToJSON(event_list):
+	event_dicts = [e.__dict__ for e in event_list]
+	for i in range(0,len(event_dicts)):
+		event_dicts[i]['starttime'] = str(event_dicts[i]['starttime'])
+		event_dicts[i]['endtime'] = str(event_dicts[i]['endtime'])
+	return json.dumps(event_dicts)
 
 def eventListToTableRows(event_list):
 	return render_template('event_table.html', events=event_list)
@@ -135,8 +144,8 @@ def jsonToEventList(eventsJson):
 		lon = float(event_dict['lon'])
 		address = event_dict['address']
 		loc_help = event_dict['loc_help']
-		desc = event_dict['desc']
 		tags = event_dict['tags']
+		desc = event_dict['desc']
 		event_list.append(Event(name,starttime,endtime,lat,lon,address,loc_help,desc,tags,None))
 	return event_list
 	
