@@ -44,13 +44,25 @@ nav {
 }
 
 input {
-	width: 910px;
+	width: 780px;
 }
 
 @media screen and (max-width: 1000px) {
 	input {
-		width: 87%
+		width: 75%
 	}
 }
 
+.form-group {
+    font-size: 30px;
+    width: 100%;
+}
 
+.form-control {
+    font-size: 25px;
+    width: 100%;
+}
+
+.ending {
+	padding-left: 20px;
+}
