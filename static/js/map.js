@@ -31,5 +31,5 @@ function renderMap(lat, lng)
                 };
                 request.open("GET", "/getEventsJSON?lat=" + lat + "&lon=" + lng + "&maxdist=" + 1, true);
                 request.send(null);
-                
+
 }
