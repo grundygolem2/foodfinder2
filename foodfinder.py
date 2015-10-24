@@ -68,7 +68,7 @@ def addEvent():
 	query = ' '.join(query.split())
 	cur.execute(query, (name,starttime,endtime,lat,lon,address,loc_help,desc,tags))
 	mysql.connection.commit()
-	return query
+	return "Inserted"
 
 @app.route("/eventTable")
 def getEventsRows():
