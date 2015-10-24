@@ -42,5 +42,5 @@ function rePopulateTable(data)
 
                 nbod[0].appendChild(trow);
         }
-        tbod[0].parentNode.replaceChild(ntbod[0], tbod[0])
+        tbod[0].parentNode.replaceChild(ntbod, tbod[0])
 }
