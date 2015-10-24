@@ -1,4 +1,4 @@
-function redrawMap(lat lng)
+function redrawMap(lat, lng)
 {
         myPos = new google.maps.LatLng(lat, lng);
         map.panTo(myPos);
