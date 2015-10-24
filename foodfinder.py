@@ -65,9 +65,18 @@ def addEvent():
 	mysql.connection.commit()
 	return query
 
+@app.route("/eventTable")
+def getEventsRows():
+	lat = float(request.args.get('lat'))
+	lon = float(request.args.get('lon'))
+	maxdist = float(request.args.get('maxdist'))
+	events = getEventsWithinRadius(lat, lon, maxdist) # 42.4074840, -71.1190230
 	
-@app.route("/getEvents", methods=['GET'])
-def getEvents():
+	return eventListToTableRows(events)
+
+
+@app.route("/getEventsJSON", methods=['GET'])
+def getEventsJSON():
 	lat = float(request.args.get('lat'))
 	lon = float(request.args.get('lon'))
 	maxdist = float(request.args.get('maxdist'))
@@ -105,10 +114,13 @@ def getEventsWithinRadius(lat, lon, miles):
 	rv = cur.fetchall()
 	
 	# Pass fields to Event constructor and make list of all
-	return [Event(*event_tuple[0:9]) for event_tuple in rv] 
+	return [Event(*event_tuple[0:10]) for event_tuple in rv] 
 
-def eventListToJSON(event_list):
-	return json.dumps([e.__dict__ for e in event_list])
+#def eventListToJSON(event_list):
+	#return json.dumps([e.__dict__ for e in event_list])
+
+def eventListToTableRows(event_list):
+	return render_template('event_table.html', events=event_list)
 
 def jsonToEventList(eventsJson):
 	list_of_dicts = json.loads(eventsJson)
@@ -125,7 +137,7 @@ def jsonToEventList(eventsJson):
 		loc_help = event_dict['loc_help']
 		desc = event_dict['desc']
 		tags = event_dict['tags']
-		event_list.append(Event(name,starttime,endtime,lat,lon,address,loc_help,desc,tags))
+		event_list.append(Event(name,starttime,endtime,lat,lon,address,loc_help,desc,tags,None))
 	return event_list
 	
 
