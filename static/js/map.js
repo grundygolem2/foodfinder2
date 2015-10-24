@@ -1,4 +1,3 @@
-
 function initMap() {
         if(navigator.geolocation){
                 navigator.geolocation.getCurrentPosition(
@@ -7,7 +6,8 @@ function initMap() {
                         });
         }
         else{
-                alert("No Geolocation So fuck you");
+                alert("Geolocation Error");
+
         }
 }
 
@@ -15,7 +15,7 @@ function initMap() {
 function renderMap(lat, lng)
 {
         myPos =new google.maps.LatLng(lat, lng);
-        map = new google.maps.Map(document.getElementById("map_canvas"),
+        map = new google.maps.Map(document.getElementById("map"),
                 {center: new google.maps.LatLng(12,12),
                 zoom: 15,
                 mapTypeId: google.maps.MapTypeId.ROADMAP});
