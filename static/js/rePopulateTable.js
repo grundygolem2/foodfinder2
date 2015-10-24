@@ -2,7 +2,6 @@ function rePopulateTable(data)
 {
         ntbod = document.createElement("tbody");
         for(var i = 0; i < data.length; i++){
-                console.log(data[i]);
                 var trow = document.createElement("tr");
 
                 //Title
@@ -40,7 +39,7 @@ function rePopulateTable(data)
                                  // which reduces to *2
                 trow.appendChild(tdat);
 
-                nbod[0].appendChild(trow);
+                ntbod.appendChild(trow);
         }
         otbod.parentNode.replaceChild(ntbod, otbod);
         otbod = ntbod;

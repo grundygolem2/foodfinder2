@@ -3,7 +3,6 @@ function populateTable(data)
         tbod = document.getElementsByTagName("tbody");
         otbod = tbod[0];
         for(var i = 0; i < data.length; i++){
-                console.log(data[i]);
                 var trow = document.createElement("tr");
 
                 //Title
