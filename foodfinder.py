@@ -19,6 +19,10 @@ mysql = MySQL(app)
 def main():
 	return render_template('index.html')
 	
+@app.route("/maptest")
+def maptest():
+	return render_template('map.html')
+	
 @app.route("/addEvent", methods=['GET']) #Change to POST later
 def addEvent():
 	if request.method == 'GET':
