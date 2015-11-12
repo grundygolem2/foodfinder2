@@ -1,1 +1,1 @@
-web: python wsgi.py --log-file -
+web: gunicorn foodfinder:app --log-file -
