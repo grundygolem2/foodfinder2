@@ -22,21 +22,21 @@ app.debug = True
 urlparse.uses_netloc.append("postgres")
 url = urlparse.urlparse(os.environ["DATABASE_URL"])
 
-#conn = psycopg2.connect(
-#  database=url.path[1:]
-#  user=url.username,
-#  password=url.password,
-#  host=url.hostname,
-#  port=url.port
-#)
-
 conn = psycopg2.connect(
-  url.path[1:]
-  url.username,
-  url.password,
-  url.hostname,
-  url.port
+  database=url.path[1:],
+  user=url.username,
+  password=url.password,
+  host=url.hostname,
+  port=url.port
 )
+
+#conn = psycopg2.connect(
+#  database="d1lbtbf44o5nt9"
+#  user="izjndjkojrremn",
+#  password="G-39T7C7FCc7PLgMBklQBCOYN4",
+#  host="ec2-107-21-106-196.compute-1.amazonaws.com",
+#  port=5432
+#)
 
 
 @app.route("/")
