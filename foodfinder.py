@@ -19,13 +19,25 @@ app.debug = True
 #mysql = MySQL(app)
 
 #postgres config
+urlparse.uses_netloc.append("postgres")
+url = urlparse.urlparse(os.environ["DATABASE_URL"])
+
+#conn = psycopg2.connect(
+#  database=url.path[1:]
+#  user=url.username,
+#  password=url.password,
+#  host=url.hostname,
+#  port=url.port
+#)
+
 conn = psycopg2.connect(
-  database=url.path[1:]
-  user=url.username,
-  password=url.password,
-  host=url.hostname,
-  port=url.port
+  url.path[1:]
+  url.username,
+  url.password,
+  url.hostname,
+  url.port
 )
+
 
 @app.route("/")
 def main():
@@ -58,27 +70,27 @@ def addEvent():
 	else:
 		loc_help = None
 	
-	if rqst('desc'):
-		desc = rqst('desc')
+	if rqst('info'):
+		info = rqst('info')
 	else:
-		desc = None
+		info = None
 		
 	if rqst('tags'):
 		tags = rqst('tags')
 	else:
 		tags = None
 	
-	cur = conn.connection.cursor#mysql.connection.cursor()
+	cur = conn.cursor()#mysql.connection.cursor()
 	query = '''
 	INSERT INTO foodfinder_events
 	(`name`,`starttime`,`endtime`,`lat`,`lon`,`address`,`loc_help`,
-	`desc`,`tags`,`addedtime`)
+	`info`,`tags`,`addedtime`)
 	VALUES
 	(%s,%s,%s,%s,%s,%s,%s,%s,%s,NOW())
 	'''
 	
 	query = ' '.join(query.split())
-	cur.execute(query, (name,starttime,endtime,lat,lon,address,loc_help,desc,tags))
+	cur.execute(query, (name,starttime,endtime,lat,lon,address,loc_help,info,tags))
 	conn.connection.commit()#mysql.connection.commit() COME BACK HERE!!!
 	return "Inserted"
 
@@ -106,11 +118,11 @@ that are not yet over and have either begun or will begin
 within the next hour
 '''
 def getEventsWithinRadius(lat, lon, miles):
-	cur = mysql.connection.cursor()
+	cur = conn.cursor()#mysql.connection.cursor()
 	query = '''
 		SELECT
 		`name`, `starttime`, `endtime`, `lat`, `lon`,
-		`address`, `loc_help`, `desc`, `tags`,
+		`address`, `loc_help`, `info`, `tags`,
 		(
 			3959 * acos ( /* Constant for calculating miles. Use 6371 for km */
 				cos ( radians(%f) ) /* My latitude */
@@ -157,8 +169,8 @@ def jsonToEventList(eventsJson):
 		address = event_dict['address']
 		loc_help = event_dict['loc_help']
 		tags = event_dict['tags']
-		desc = event_dict['desc']
-		event_list.append(Event(name,starttime,endtime,lat,lon,address,loc_help,desc,tags,None))
+		info = event_dict['info']
+		event_list.append(Event(name,starttime,endtime,lat,lon,address,loc_help,info,tags,None))
 	return event_list
 	
 
