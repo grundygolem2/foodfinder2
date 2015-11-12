@@ -1,1 +1,1 @@
-web: guinicorn wsgi.py --log-file -
+web: python wsgi.py --log-file -
