@@ -12,7 +12,7 @@ app.debug = True
 app.config['MYSQL_USER'] = 'foodfinderuser'
 app.config['MYSQL_PASSWORD'] = 'tuftsffuser'
 app.config['MYSQL_DB'] = 'foodfinder'
-app.config['MYSQL_HOST'] = '10.245.150.176'
+app.config['MYSQL_HOST'] = 'localhost'# '10.245.150.176'
 mysql = MySQL(app)
 
 @app.route("/")
