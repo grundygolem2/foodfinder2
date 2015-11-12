@@ -3,17 +3,29 @@ from flask.ext.mysqldb import MySQL
 from event import Event
 import time,datetime
 import json
+import os
+import psycopg2
+import urlparse
 
 
 app = Flask(__name__)
 app.debug = True
  
 # MySQL configurations
-app.config['MYSQL_USER'] = 'foodfinderuser'
-app.config['MYSQL_PASSWORD'] = 'tuftsffuser'
-app.config['MYSQL_DB'] = 'foodfinder'
-app.config['MYSQL_HOST'] = 'localhost'# '10.245.150.176'
-mysql = MySQL(app)
+#app.config['MYSQL_USER'] = 'foodfinderuser'
+#app.config['MYSQL_PASSWORD'] = 'tuftsffuser'
+#app.config['MYSQL_DB'] = 'foodfinder'
+#app.config['MYSQL_HOST'] = 'localhost'# '10.245.150.176'
+#mysql = MySQL(app)
+
+#postgres config
+conn = psycopg2.connect(
+  database=url.path[1:]
+  user=url.username,
+  password=url.password,
+  host=url.hostname,
+  port=url.port
+)
 
 @app.route("/")
 def main():
@@ -56,7 +68,7 @@ def addEvent():
 	else:
 		tags = None
 	
-	cur = mysql.connection.cursor()
+	cur = conn.connection.cursor#mysql.connection.cursor()
 	query = '''
 	INSERT INTO foodfinder_events
 	(`name`,`starttime`,`endtime`,`lat`,`lon`,`address`,`loc_help`,
@@ -67,7 +79,7 @@ def addEvent():
 	
 	query = ' '.join(query.split())
 	cur.execute(query, (name,starttime,endtime,lat,lon,address,loc_help,desc,tags))
-	mysql.connection.commit()
+	conn.connection.commit()#mysql.connection.commit() COME BACK HERE!!!
 	return "Inserted"
 
 @app.route("/eventTable")
