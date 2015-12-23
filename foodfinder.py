@@ -86,7 +86,7 @@ def addEvent():
 	'''
 
 	query = ' '.join(query.split())
-	cur.execute(query, (name,starttime,endtime,lat,lon,address,loc_help,info,tags))
+	cur.execute(query, (name,starttime,endtime,lat,lon,address,loc_help,description,tags))
 	mysql.connection.commit()
 	return "Inserted"
 
