@@ -114,7 +114,7 @@ that are not yet over and have either begun or will begin
 within the next hour
 '''
 def getEventsWithinRadius(lat, lon, miles):
-	cur = conn.cursor()#mysql.connection.cursor()
+	cur = mysql.connection.cursor()
 	query = '''
 		SELECT
 		`name`, `starttime`, `endtime`, `lat`, `lon`,
