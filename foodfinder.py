@@ -121,6 +121,7 @@ within the next hour
 '''
 def getEventsWithinRadius(lat, lon, miles, time):
 	cur = mysql.connection.cursor()
+        print time
 	query = '''
 		SELECT
 		`name`, `starttime`, `endtime`, `lat`, `lon`,
@@ -140,10 +141,10 @@ def getEventsWithinRadius(lat, lon, miles, time):
 		AND DATE_ADD(%s, INTERVAL 1 HOUR) >= `starttime` /* Get events begun up to starting within the hour */
 		ORDER BY dist_miles
 		LIMIT 0 , 20;''' % (lat, lon, lat, miles, time)
+        print query
 	query = ' '.join(query.split())
 	rv = cur.execute(query)
 	rv = cur.fetchall()
-        print query
         print rv
 	# Pass fields to Event constructor and make list of all
 	return [Event(*event_tuple[0:10]) for event_tuple in rv]
