@@ -26,7 +26,6 @@ function redrawMap(lat, lng)
 	var date = yyyy+'-'+mm+'-'+dd;
 	var hh = today.getHours();
 	var mn = today.getMinutes();
-	}
 	if(hh<10){
 		hh='0'+hh;
 	}
