@@ -106,6 +106,7 @@ def getEventsJSON():
 	lon = float(request.args.get('lon'))
 	maxdist = float(request.args.get('maxdist'))
 	events = getEventsWithinRadius(lat, lon, maxdist) # 42.4074840, -71.1190230 mine
+        print events
 	return eventListToJSON(events)
 
 '''
