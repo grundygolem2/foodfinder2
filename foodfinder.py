@@ -66,10 +66,10 @@ def addEvent():
 	else:
 		loc_help = None
 
-	if rqst('info'):
-		info = rqst('info')
+	if rqst('description'):
+		description = rqst('description')
 	else:
-		info = None
+		description = None
 
 	if rqst('tags'):
 		tags = rqst('tags')
@@ -80,7 +80,7 @@ def addEvent():
 	query = '''
 	INSERT INTO foodfinder_events
 	(`name`,`starttime`,`endtime`,`lat`,`lon`,`address`,`loc_help`,
-	`info`,`tags`,`addedtime`)
+	`description`,`tags`,`addedtime`)
 	VALUES
 	(%s,%s,%s,%s,%s,%s,%s,%s,%s,NOW())
 	'''
@@ -165,8 +165,8 @@ def jsonToEventList(eventsJson):
 		address = event_dict['address']
 		loc_help = event_dict['loc_help']
 		tags = event_dict['tags']
-		info = event_dict['info']
-		event_list.append(Event(name,starttime,endtime,lat,lon,address,loc_help,info,tags,None))
+		description = event_dict['description']
+		event_list.append(Event(name,starttime,endtime,lat,lon,address,loc_help,description,tags,None))
 	return event_list
 
 
