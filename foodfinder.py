@@ -137,10 +137,10 @@ def getEventsWithinRadius(lat, lon, miles, time):
 		) AS dist_miles
 		FROM foodfinder_events
 		HAVING dist_miles < %f
-		AND NOW() <= `endtime` /* Get events that are not over */
+		AND '%s' <= `endtime` /* Get events that are not over */
 		AND DATE_ADD('%s', INTERVAL 1 HOUR) >= `starttime` /* Get events begun up to starting within the hour */
 		ORDER BY dist_miles
-		LIMIT 0 , 20;''' % (lat, lon, lat, miles, time)
+		LIMIT 0 , 20;''' % (lat, lon, lat, miles, time, time)
         print query
 	query = ' '.join(query.split())
 	rv = cur.execute(query)
