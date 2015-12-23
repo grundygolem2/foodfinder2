@@ -76,17 +76,21 @@ def addEvent():
 	else:
 		tags = None
 
+        if rqst('addedtime'):
+                addedtime = rqst('addedtime')
+        else:
+                addedtime = None
 	cur = mysql.connection.cursor()
 	query = '''
 	INSERT INTO foodfinder_events
 	(`name`,`starttime`,`endtime`,`lat`,`lon`,`address`,`loc_help`,
 	`description`,`tags`,`addedtime`)
 	VALUES
-	(%s,%s,%s,%s,%s,%s,%s,%s,%s,NOW())
+	(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)
 	'''
 
 	query = ' '.join(query.split())
-	cur.execute(query, (name,starttime,endtime,lat,lon,address,loc_help,description,tags))
+	cur.execute(query, (name,starttime,endtime,lat,lon,address,loc_help,description,tags,addedtime))
 	mysql.connection.commit()
 	return "Inserted"
 
@@ -95,7 +99,8 @@ def getEventsRows():
 	lat = float(request.args.get('lat'))
 	lon = float(request.args.get('lon'))
 	maxdist = float(request.args.get('maxdist'))
-	events = getEventsWithinRadius(lat, lon, maxdist) # 42.4074840, -71.1190230
+        time = request.args.get('time')
+	events = getEventsWithinRadius(lat, lon, maxdist, time) # 42.4074840, -71.1190230
 
 	return eventListToTableRows(events)
 
@@ -105,7 +110,8 @@ def getEventsJSON():
 	lat = float(request.args.get('lat'))
 	lon = float(request.args.get('lon'))
 	maxdist = float(request.args.get('maxdist'))
-	events = getEventsWithinRadius(lat, lon, maxdist) # 42.4074840, -71.1190230 mine
+        time = request.args.get('time')
+	events = getEventsWithinRadius(lat, lon, maxdist, time) # 42.4074840, -71.1190230 mine
 	return eventListToJSON(events)
 
 '''
@@ -113,7 +119,7 @@ Finds events within 'miles' from location ('lat','lon')
 that are not yet over and have either begun or will begin
 within the next hour
 '''
-def getEventsWithinRadius(lat, lon, miles):
+def getEventsWithinRadius(lat, lon, miles, time):
 	cur = mysql.connection.cursor()
 	query = '''
 		SELECT
@@ -131,9 +137,9 @@ def getEventsWithinRadius(lat, lon, miles):
 		FROM foodfinder_events
 		HAVING dist_miles < %f
 		AND NOW() <= `endtime` /* Get events that are not over */
-		AND DATE_ADD(NOW(), INTERVAL 1 HOUR) >= `starttime` /* Get events begun up to starting within the hour */
+		AND DATE_ADD(%s, INTERVAL 1 HOUR) >= `starttime` /* Get events begun up to starting within the hour */
 		ORDER BY dist_miles
-		LIMIT 0 , 20;''' % (lat, lon, lat, miles)
+		LIMIT 0 , 20;''' % (lat, lon, lat, miles, time)
 	query = ' '.join(query.split())
 	rv = cur.execute(query)
 	rv = cur.fetchall()

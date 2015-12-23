@@ -12,7 +12,31 @@ function redrawMap(lat, lng)
                         rePopulateTable(data);
                 }
         };
-        request.open("GET", "/getEventsJSON?lat=" + lat + "&lon=" + lng + "&maxdist=" + 1, true);
+        var today = new Date();
+	var dd = today.getDate();
+	var mm = today.getMonth()+1; //January is 0!
+
+	var yyyy = today.getFullYear();
+	if(dd<10){
+		dd='0'+dd;
+	}
+	if(mm<10){
+		mm='0'+mm;
+	}
+	var date = yyyy+'-'+mm+'-'+dd;
+	var hh = today.getHours();
+	var mn = today.getMinutes();
+	}
+	if(hh<10){
+		hh='0'+hh;
+	}
+	if(mn<10){
+		mn='0'+mn;
+	}
+	var time = hh+":"+mn+":00";
+
+        curtime= date + ' ' + time;
+        request.open("GET", "/getEventsJSON?lat=" + lat + "&lon=" + lng + "&maxdist=" + 1 + "&time=" + curtime, true);
         request.send(null);
 }
 
