@@ -94,7 +94,7 @@ def addEvent():
 def getEventsRows():
 	lat = float(request.args.get('lat'))
 	lon = float(request.args.get('lon'))
-	maxdist = float(request.args.get('maxdist'))
+	maxdist = 5#float(request.args.get('maxdist'))
 	events = getEventsWithinRadius(lat, lon, maxdist) # 42.4074840, -71.1190230
 
 	return eventListToTableRows(events)
@@ -104,7 +104,7 @@ def getEventsRows():
 def getEventsJSON():
 	lat = float(request.args.get('lat'))
 	lon = float(request.args.get('lon'))
-	maxdist = float(request.args.get('maxdist'))
+	maxdist = 5#float(request.args.get('maxdist'))
 	events = getEventsWithinRadius(lat, lon, maxdist) # 42.4074840, -71.1190230 mine
 	return eventListToJSON(events)
 
