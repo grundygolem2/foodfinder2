@@ -106,7 +106,6 @@ def getEventsJSON():
 	lon = float(request.args.get('lon'))
 	maxdist = float(request.args.get('maxdist'))
 	events = getEventsWithinRadius(lat, lon, maxdist) # 42.4074840, -71.1190230 mine
-        print events
 	return eventListToJSON(events)
 
 '''
@@ -138,7 +137,8 @@ def getEventsWithinRadius(lat, lon, miles):
 	query = ' '.join(query.split())
 	rv = cur.execute(query)
 	rv = cur.fetchall()
-
+        print query
+        print rv
 	# Pass fields to Event constructor and make list of all
 	return [Event(*event_tuple[0:10]) for event_tuple in rv]
 
