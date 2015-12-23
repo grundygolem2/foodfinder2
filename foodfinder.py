@@ -10,14 +10,16 @@ import urlparse
 
 app = Flask(__name__)
 app.debug = True
- 
-# MySQL configurations
-#app.config['MYSQL_USER'] = 'foodfinderuser'
-#app.config['MYSQL_PASSWORD'] = 'tuftsffuser'
-#app.config['MYSQL_DB'] = 'foodfinder'
-#app.config['MYSQL_HOST'] = 'localhost'# '10.245.150.176'
-#mysql = MySQL(app)
 
+# MySQL configurations
+app.config['MYSQL_USER'] = 'b6d4aa52f18aa3'
+app.config['MYSQL_PASSWORD'] = '0580749d'
+app.config['MYSQL_DB'] = 'heroku_3d39916556b689d'
+app.config['MYSQL_HOST'] = 'us-cdbr-iron-east-03.cleardb.net'
+mysql = MySQL(app)
+
+
+"""
 #postgres config
 urlparse.uses_netloc.append("postgres")
 url = urlparse.urlparse(os.environ["DATABASE_URL"])
@@ -29,58 +31,52 @@ conn = psycopg2.connect(
   host=url.hostname,
   port=url.port
 )
+"""
 
-#conn = psycopg2.connect(
-#  database="d1lbtbf44o5nt9"
-#  user="izjndjkojrremn",
-#  password="G-39T7C7FCc7PLgMBklQBCOYN4",
-#  host="ec2-107-21-106-196.compute-1.amazonaws.com",
-#  port=5432
-#)
 
 
 @app.route("/")
 def main():
 	return render_template('index.html')
-	
+
 @app.route("/maptest")
 def maptest():
 	return render_template('map.html')
-	
+
 @app.route("/addEvent", methods=['POST']) #Change to POST later
 def addEvent():
 	if request.method == 'GET':
 		rqst = request.args.get
 	else:
 		rqst = request.form.get
-	
+
 	name = rqst('name')
 	starttime = rqst('starttime')
 	endtime = rqst('endtime')
 	lat = float(rqst('lat'))
 	lon = float(rqst('lon'))
-	
+
 	if rqst('address'):
 		address = rqst('address')
 	else:
 		address = None
-	
+
 	if rqst('loc_help'):
 		loc_help = rqst('loc_help')
 	else:
 		loc_help = None
-	
+
 	if rqst('info'):
 		info = rqst('info')
 	else:
 		info = None
-		
+
 	if rqst('tags'):
 		tags = rqst('tags')
 	else:
 		tags = None
-	
-	cur = conn.cursor()#mysql.connection.cursor()
+
+	cur = mysql.connection.cursor()
 	query = '''
 	INSERT INTO foodfinder_events
 	(`name`,`starttime`,`endtime`,`lat`,`lon`,`address`,`loc_help`,
@@ -88,10 +84,10 @@ def addEvent():
 	VALUES
 	(%s,%s,%s,%s,%s,%s,%s,%s,%s,NOW())
 	'''
-	
+
 	query = ' '.join(query.split())
 	cur.execute(query, (name,starttime,endtime,lat,lon,address,loc_help,info,tags))
-	conn.connection.commit()#mysql.connection.commit() COME BACK HERE!!!
+	mysql.connection.commit()
 	return "Inserted"
 
 @app.route("/eventTable")
@@ -100,7 +96,7 @@ def getEventsRows():
 	lon = float(request.args.get('lon'))
 	maxdist = float(request.args.get('maxdist'))
 	events = getEventsWithinRadius(lat, lon, maxdist) # 42.4074840, -71.1190230
-	
+
 	return eventListToTableRows(events)
 
 
@@ -111,7 +107,7 @@ def getEventsJSON():
 	maxdist = float(request.args.get('maxdist'))
 	events = getEventsWithinRadius(lat, lon, maxdist) # 42.4074840, -71.1190230 mine
 	return eventListToJSON(events)
-	
+
 '''
 Finds events within 'miles' from location ('lat','lon')
 that are not yet over and have either begun or will begin
@@ -122,7 +118,7 @@ def getEventsWithinRadius(lat, lon, miles):
 	query = '''
 		SELECT
 		`name`, `starttime`, `endtime`, `lat`, `lon`,
-		`address`, `loc_help`, `info`, `tags`,
+		`address`, `loc_help`, `description`, `tags`,
 		(
 			3959 * acos ( /* Constant for calculating miles. Use 6371 for km */
 				cos ( radians(%f) ) /* My latitude */
@@ -141,9 +137,9 @@ def getEventsWithinRadius(lat, lon, miles):
 	query = ' '.join(query.split())
 	rv = cur.execute(query)
 	rv = cur.fetchall()
-	
+
 	# Pass fields to Event constructor and make list of all
-	return [Event(*event_tuple[0:10]) for event_tuple in rv] 
+	return [Event(*event_tuple[0:10]) for event_tuple in rv]
 
 def eventListToJSON(event_list):
 	event_dicts = [e.__dict__ for e in event_list]
@@ -172,7 +168,7 @@ def jsonToEventList(eventsJson):
 		info = event_dict['info']
 		event_list.append(Event(name,starttime,endtime,lat,lon,address,loc_help,info,tags,None))
 	return event_list
-	
+
 
 if __name__ == "__main__":
     app.run()
