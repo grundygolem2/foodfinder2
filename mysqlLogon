@@ -1,0 +1,2 @@
+#!/bin/bash
+mysql --host=us-cdbr-iron-east-03.cleardb.net --user=b6d4aa52f18aa3 --password=0580749d

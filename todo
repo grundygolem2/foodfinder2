@@ -1,0 +1,19 @@
+1. Style
+Note: I think we should do this first, as reorganization should probably be done before other work
+  a. Move the JS out of the .html files
+  b. Reorganize the JS so the file names make a bit more sense, and are a bit more unified
+  c. Comment stuff. A big part of this project, at least for me, is to use as an example of my work, and good comments help with that.
+2. Bugs
+  a. The system has problems with differing time zones. The JS should switch all times to UTC or something.
+  b. The server does not validate incoming data, making it easy to inject stuff.
+3. Features
+  a. First Round Addition
+    i. Allow people to have better control over what time/location they want to show up
+    ii. Implement Tagging
+    iii. Better CSS for mobile.
+  b. Second Round Addition
+    i. Apps for the various mobile app stores
+    ii. Extend 'foodfinder' to 'event finder' (Maybe?)
+4. Advertising / populating the DB?
+  a. ff is only useful if lots of people use it: get people using it.
+  b. Figure out a way to scrape FB or some other site for events?
