@@ -220,6 +220,10 @@ def getEventsWithinRadius(lat, lng, miles, time):
 def eventListToJSON(event_list):
 	"""
 	Converts a list of Event objects (see event.py) to a JSON list.
+	Used to output JSON when requested by client.
+
+	@type event_list:  List of Event objects
+	@param event_list: List of Event objects to convert to JSON format
 
 	@rtype:  string
 	@return: Returns the JSON list as a string
@@ -231,9 +235,27 @@ def eventListToJSON(event_list):
 	return json.dumps(event_dicts)
 
 def eventListToTableRows(event_list):
+	"""
+	Converts a list of Event objects (see event.py) to a string containing HTML table rows.
+	Used to output an HTML table when requested by client.
+
+	Uses the template: templates/event_table.html
+
+	@type event_list:  List of Event objects
+	@param event_list: List of Event objects to convert to JSON format
+
+	@rtype:  string
+	@return: Returns the HTML table rows as a string, using a template
+	"""
 	return render_template('event_table.html', events=event_list)
 
 def jsonToEventList(eventsJson):
+	"""
+	Converts a JSON list of events to a Python list of Event objects
+
+	@rtype:  List of Event objects
+	@return: A Python list of Event objects derived from the JSON list input.
+	"""
 	list_of_dicts = json.loads(eventsJson)
 	if not isinstance(list_of_dicts,list):
 		list_of_dicts = [list_of_dicts]
@@ -253,4 +275,7 @@ def jsonToEventList(eventsJson):
 
 
 if __name__ == "__main__":
+	"""
+	When this file is executed, begin the server
+	"""
 	app.run()
